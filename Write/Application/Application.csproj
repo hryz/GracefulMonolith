@@ -9,10 +9,15 @@
     <Folder Include="Catalog\CommandHandlers\" />
     <Folder Include="Catalog\Events\" />
     <Folder Include="Catalog\Validators\" />
-    <Folder Include="Customer\CommandHandlers\" />
-    <Folder Include="Customer\Commands\" />
-    <Folder Include="Customer\Events\" />
-    <Folder Include="Customer\Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.6.104" />
+    <PackageReference Include="MediatR" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

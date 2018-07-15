@@ -5,18 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Entities\" />
-    <Folder Include="Catalog\Mappers\" />
-    <Folder Include="Catalog\Builders\" />
-    <Folder Include="Catalog\Repositories\" />
-    <Folder Include="Customer\Builders\" />
-    <Folder Include="Customer\Entities\" />
-    <Folder Include="Customer\Mappers\" />
-    <Folder Include="Customer\Repositories\" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

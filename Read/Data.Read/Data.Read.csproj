@@ -15,4 +15,8 @@
     <Folder Include="Customer\Validators\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="5.0.1" />
+  </ItemGroup>
+
 </Project>
