@@ -9,13 +9,12 @@
     <Folder Include="Catalog\ReadModels\" />
     <Folder Include="Catalog\QueryHandlers\" />
     <Folder Include="Catalog\Queries\" />
-    <Folder Include="Customer\Queries\" />
-    <Folder Include="Customer\QueryHandlers\" />
-    <Folder Include="Customer\ReadModels\" />
-    <Folder Include="Customer\Validators\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Dapper.Logging" Version="0.1.0" />
+    <PackageReference Include="FluentValidation" Version="7.6.104" />
     <PackageReference Include="MediatR" Version="5.0.1" />
   </ItemGroup>
 

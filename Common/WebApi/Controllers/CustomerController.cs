@@ -1,4 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Customers.Commands;
+using Data.Read.Abstract;
+using Data.Read.Customers.Queries;
+using Data.Read.Customers.ReadModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -7,31 +15,30 @@ namespace WebApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly IMediator _mediator;
+
+        public CustomerController(IMediator mediator) => _mediator = mediator;
+
+        //Queries
+
+        [HttpGet("list")]
+        public Task<IPageResult<CustomerListItem>> GetList([FromQuery] GetCustomerList query, CancellationToken token) => _mediator.Send(query, token);
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
+        public Task<CustomerDetails> GetDetails([FromRoute] GetCustomerDetails query, CancellationToken token) => _mediator.Send(query, token);
 
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //Commands
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        [HttpPost("register")]
+        public async Task<Guid> Register([FromBody] RegisterCustomer cmd, CancellationToken token) => await _mediator.Send(cmd, token);
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [HttpPut("move")]
+        public async Task Move([FromBody] MoveCustomer cmd, CancellationToken token) => await _mediator.Send(cmd, token);
+
+        [HttpPut("enable")]
+        public async Task Enable([FromBody] EnableCustomer cmd, CancellationToken token) => await _mediator.Send(cmd, token);
+
+        [HttpPut("disable")]
+        public async Task Disable([FromBody] DisableCustomer cmd, CancellationToken token) => await _mediator.Send(cmd, token);
     }
 }

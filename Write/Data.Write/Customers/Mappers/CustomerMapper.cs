@@ -1,9 +1,10 @@
-﻿using Data.Write.Customers.Entities;
+﻿using AutoMapper;
+using Data.Write.Customers.Entities;
 using Domain.Customer;
 
 namespace Data.Write.Customers.Mappers
 {
-    public class CustomerMapper : AutoMapper.Profile
+    public class CustomerMapper : Profile
     {
         public CustomerMapper()
         {
