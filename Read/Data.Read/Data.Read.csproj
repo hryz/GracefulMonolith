@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Catalog\Validators\" />
+    <Folder Include="Catalog\ReadModels\" />
+    <Folder Include="Catalog\QueryHandlers\" />
+    <Folder Include="Catalog\Queries\" />
+    <Folder Include="Customer\Queries\" />
+    <Folder Include="Customer\QueryHandlers\" />
+    <Folder Include="Customer\ReadModels\" />
+    <Folder Include="Customer\Validators\" />
+  </ItemGroup>
+
+</Project>

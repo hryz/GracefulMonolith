@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Catalog\Entities\" />
+    <Folder Include="Catalog\Mappers\" />
+    <Folder Include="Catalog\Builders\" />
+    <Folder Include="Catalog\Repositories\" />
+    <Folder Include="Customer\Builders\" />
+    <Folder Include="Customer\Entities\" />
+    <Folder Include="Customer\Mappers\" />
+    <Folder Include="Customer\Repositories\" />
+  </ItemGroup>
+
+</Project>
