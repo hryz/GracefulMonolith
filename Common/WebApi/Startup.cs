@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
+using WebApi.Infrastructure;
 
 namespace WebApi
 {
@@ -43,6 +45,15 @@ namespace WebApi
                     .RegisterValidatorsFromAssemblyContaining(typeof(ICommand<>))
                     .RegisterValidatorsFromAssemblyContaining(typeof(IQuery<>)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info {Title = "Graceful Monolith", Version = "v1"});
+                c.DescribeAllEnumsAsStrings();
+                c.SchemaFilter<SwaggerFluentValidationProvider>();
+                c.SchemaFilter<SwaggerSampleModelProvider>();
+                c.OperationFilter<SwaggerAuthDefinitionProvider>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -55,6 +66,8 @@ namespace WebApi
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger().UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Graceful Monolith"));
 
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Tests.Integration
 {
     [TestClass]
-    public class DapperTests
+    public class SqlQuerySyntaxTests
     {
         private const string ConnectionString = "Server=.;Database=gm;Trusted_Connection=True;";
 

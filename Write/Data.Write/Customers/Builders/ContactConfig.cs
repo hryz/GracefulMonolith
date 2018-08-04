@@ -10,6 +10,7 @@ namespace Data.Write.Customers.Builders
         public void Configure(EntityTypeBuilder<ContactEntity> builder)
         {
             //Fluent Api will be here
+            builder.ToTable("contact");
         }
     }
 }
