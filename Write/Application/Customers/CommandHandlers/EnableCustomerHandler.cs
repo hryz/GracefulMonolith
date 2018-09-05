@@ -24,7 +24,7 @@ namespace Application.Customers.CommandHandlers
         {
             var customer = await _repository.Get(request.CustomerId, cancellationToken);
             
-            customer.Disable();
+            customer.Enable();
 
             await _repository.Update(customer, cancellationToken);
             await _mediator.Publish(new CustomerEnabled(request.CustomerId), cancellationToken);
