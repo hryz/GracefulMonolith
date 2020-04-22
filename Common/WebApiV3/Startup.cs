@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+using System.Data.SqlClient;
 using Application.Abstract;
 using AutoMapper;
 using Dapper.Logging;
@@ -15,10 +15,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
-using WebApi.Infrastructure;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using WebApiV3.Infrastructure;
 
-namespace WebApi
+namespace WebApiV3
 {
     public class Startup
     {
@@ -40,39 +41,42 @@ namespace WebApi
                 .AddMediatR(typeof(ICommand<>), typeof(IQuery<>))
                 .AddAutoMapper(typeof(CustomerMapper))
                 .AddDataWriteServices()
-                .AddMvc()
+                .AddControllers()
                 .AddFluentValidation(val => val
                     .RegisterValidatorsFromAssemblyContaining(typeof(ICommand<>))
                     .RegisterValidatorsFromAssemblyContaining(typeof(IQuery<>)))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "Graceful Monolith", Version = "v1"});
-                c.DescribeAllEnumsAsStrings();
+                c.SwaggerDoc("v1", new OpenApiInfo{Title = "Graceful Monolith", Version = "v1"});
                 c.SchemaFilter<SwaggerFluentValidationProvider>();
                 c.SchemaFilter<SwaggerSampleModelProvider>();
                 c.OperationFilter<SwaggerAuthDefinitionProvider>();
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseSwagger().UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Graceful Monolith"));
+            app.UseSwagger().UseSwaggerUI(x => x.SwaggerEndpoint(
+                "/swagger/v1/swagger.json", "Graceful Monolith"));
 
+            
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
-
-    
 }

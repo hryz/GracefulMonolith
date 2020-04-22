@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace WebApiV3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

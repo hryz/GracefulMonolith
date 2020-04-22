@@ -3,7 +3,7 @@ using Application.Customers.Validators;
 using Data.Read.Customers.Validators;
 using FluentValidation.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApi.Controllers;
+using WebApiV3.Controllers;
 
 namespace Tests.Integration
 {

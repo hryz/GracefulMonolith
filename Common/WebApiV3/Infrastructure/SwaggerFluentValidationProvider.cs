@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using FluentValidation;
 using FluentValidation.Validators;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebApi.Infrastructure
+namespace WebApiV3.Infrastructure
 {
     public class SwaggerFluentValidationProvider : ISchemaFilter
     {
@@ -17,9 +17,10 @@ namespace WebApi.Infrastructure
             _factory = factory;
         }
 
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
-            var validator = _factory.GetService(typeof(AbstractValidator<>).MakeGenericType(context.SystemType)) as IValidator;
+            var validator = _factory.GetService(typeof(AbstractValidator<>)
+                .MakeGenericType(context.Type)) as IValidator;
             if (validator == null)
             {
                 return;
@@ -27,7 +28,7 @@ namespace WebApi.Infrastructure
 
             if (model.Required == null)
             {
-                model.Required = new List<string>();
+                model.Required = new HashSet<string>();
             }
 
             var validatorDescriptor = validator.CreateDescriptor();
@@ -45,7 +46,7 @@ namespace WebApi.Infrastructure
             }
         }
 
-        private static void SetValidationRule(Schema schema, IPropertyValidator propertyValidator)
+        private static void SetValidationRule(OpenApiSchema schema, IPropertyValidator propertyValidator)
         {
             if (propertyValidator is LengthValidator lengthValidator)
             {
@@ -118,5 +119,6 @@ namespace WebApi.Infrastructure
 
             return inputString.Substring(0, 1).ToUpper() + inputString.Substring(1);
         }
+
     }
 }

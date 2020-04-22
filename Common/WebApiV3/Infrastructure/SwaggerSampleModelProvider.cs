@@ -1,11 +1,11 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
+﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebApi.Infrastructure
+namespace WebApiV3.Infrastructure
 {
     public class SwaggerSampleModelProvider : ISchemaFilter
     {
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             if (model?.Properties?.Keys == null)
             {
@@ -14,8 +14,9 @@ namespace WebApi.Infrastructure
 
             foreach (var key in model.Properties.Keys)
             {
-                model.Properties[key].ReadOnly = null;
+                model.Properties[key].ReadOnly = false;
             }
         }
+
     }
 }

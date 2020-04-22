@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Customers.Commands;
@@ -9,7 +8,7 @@ using Data.Read.Customers.ReadModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace WebApiV3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
